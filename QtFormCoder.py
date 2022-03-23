@@ -117,7 +117,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Простейшие алгоритмы сжатия - Coder"))
         self.label1.setText(_translate("MainWindow", "Исходное сообщение"))
-        self.lineEdit1.setText(_translate("MainWindow", "lineEdit1"))
+        self.lineEdit1.setText(_translate("MainWindow", "красная_краска"))
         self.label.setText(_translate("MainWindow", "Кодовая таблица"))
         self.pushButton1.setText(_translate("MainWindow", "Проход 1: Создание кодовой таблицы"))
         self.label2.setText(_translate("MainWindow", "Сжатое сообщение"))

@@ -4,7 +4,7 @@
 from PyQt5 import QtWidgets 
 import sys
 # импорт сгенерированной фармы
-from forms.QtFormCoder import Ui_MainWindow
+from QtFormCoder import Ui_MainWindow
 # и функционала
 import SimplestCompression as sc
 

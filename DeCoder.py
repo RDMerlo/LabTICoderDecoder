@@ -62,7 +62,6 @@ class cWindow(QtWidgets.QMainWindow):
             msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
             msg.exec_()
             return
-        print(1)
         # Прочитаем кодовую таблицу
         nCodeTable = self.ui.tableWidget.rowCount()
         if nCodeTable == 0:
@@ -74,7 +73,6 @@ class cWindow(QtWidgets.QMainWindow):
             msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
             msg.exec_()
             return
-        print(2)
         codeTable = []
         for row in range(nCodeTable):
             cellInfo = QtWidgets. \
@@ -90,9 +88,7 @@ class cWindow(QtWidgets.QMainWindow):
                 p = 0
                 cellInfo = QtWidgets.QTableWidgetItem(self.ui.tableWidget.item(row, 2))
                 codeTable.append(sc.codeElem(x, p, code=str(cellInfo.text()).strip()))
-        print(3)
         # Создадим и запишем исходное сообщение
-        # FIXME:
         tOutputText = sc.makeDeCodeText(tInputText, codeTable)
         self.ui.lineEdit2.setText(tOutputText)
         return

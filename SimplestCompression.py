@@ -43,7 +43,6 @@ class codeElem:
 
     # Сравнение ("меньше") элементов кодовой таблицы
     def __lt__(self, other):
-        print(self.x, "=", other.x)
         return (self.p > other.p) or ((self.p == other.p) and (self.x < other.x))
 
 
@@ -90,19 +89,13 @@ def makeHuffman(bTable):
     # Формируем дерево
     k = len(bTable)
     # Пока не достигнут корень дерева
-    for a in bTable:
-        print(a.x, "=h")
-
     while k > 1:
         # Сортируем список
-        print(0)
         bTable.sort()
         # Создаем промежуточную вершину, ссылающуюся на 2 последних
         # элемента списка
         i = k - 1 # для удобства индекс списка будет таким
-        print(k)
-        obTree = codeElem(bCh, bTable[i].p + bTable[i - 1].p)
-        print(k*k)
+        obTree = codeElem(chr(bCh), bTable[i].p + bTable[i - 1].p)
         obTree.left = bTable[i - 1]
         obTree.right = bTable[i]
         # # Удаляем из списка 2 последних элемента
@@ -110,7 +103,6 @@ def makeHuffman(bTable):
         bTable.pop(i - 1)
         # # Добавляем в конец списка промежуточную вершину
         bTable.append(obTree)
-        print(k * k * k)
         # Новым промежуточным вершинам дерева будем присваивать символы
         # с конца таблицы
         bCh -= 1

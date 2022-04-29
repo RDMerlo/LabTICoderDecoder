@@ -24,8 +24,40 @@ class cWindow(QtWidgets.QMainWindow):
 		# подключение клик-сигнала к слоту btn1Clicked 
 		self.ui.pushButton1.clicked.connect(self.btn1Clicked) 
 		# подключение клик-сигнала к слоту btn2Clicked 
-		self.ui.pushButton2.clicked.connect(self.btn2Clicked) 
+		self.ui.pushButton2.clicked.connect(self.btn2Clicked)
+		self.ui.pushButton3.clicked.connect(self.btn3Clicked)
 		pass
+	def btn3Clicked(self):
+		rowCol = self.ui.tableWidget.rowCount()
+
+		import xml.etree.ElementTree as ET
+
+		root = ET.Element('data')
+		tree = ET.ElementTree(element=root)
+
+		employ_methodcode = ET.SubElement(root, 'method-code')
+		employ_methodcode.text = 'Метод Хафмана'
+		employ_textcode= ET.SubElement(root, 'text-code')
+		employ_textcode.text = self.ui.lineEdit2.text()
+
+		employee_table = ET.SubElement(root, 'table')
+		for row in range(rowCol):
+			print('x=',self.ui.tableWidget.item(row, 0).text())
+			print('p=',self.ui.tableWidget.item(row, 1).text())
+			print('code=',self.ui.tableWidget.item(row, 2).text())
+
+			employee_row = ET.SubElement(employee_table, 'row')
+
+			employ_symbol = ET.SubElement(employee_row, 'symbol')
+			employ_symbol.text = self.ui.tableWidget.item(row, 0).text()
+			employ_p = ET.SubElement(employee_row, 'probability')
+			employ_p.text = self.ui.tableWidget.item(row, 1).text()
+			employ_code = ET.SubElement(employee_row, 'code')
+			employ_code.text = self.ui.tableWidget.item(row, 2).text()
+		# xml_declaration=Trueにすると、バージョン情報など書き込んでくれる
+		tree.write('test.xml', encoding='utf-8', xml_declaration=True)
+		tree = ET.ElementTree(file='test.xml')
+		return
 	def btn1Clicked(self):
 	# Прочитаем исходное сообщение
 		tInputText = self.ui.lineEdit1.text()

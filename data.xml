@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<data>
+    <method-code></method-code>
+    <table>
+        <row>
+            <symbol></symbol>
+            <probability></probability>
+            <code></code>
+        </row>
+        <row>
+            <symbol></symbol>
+            <probability></probability>
+            <code></code>
+        </row>
+    </table>
+    <text-code></text-code>
+</data>

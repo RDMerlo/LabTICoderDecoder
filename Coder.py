@@ -9,12 +9,14 @@ from QtFormCoder import Ui_MainWindow
 import SimplestCompression as sc
 
 class cWindow(QtWidgets.QMainWindow):
+	mtd_operation = {sc.nMethodShannonFano:'mtd-shanon-fano', sc.nMethodHuffman:'mtd-huffman'}
+
 	def __init__(self):
 		super(cWindow, self).__init__()
 		self.ui = Ui_MainWindow() 
 		self.ui.setupUi(self) 
 		self.ui.comboBox.addItems(sc.listMethod)
-		self.ui.comboBox.setCurrentIndex(sc.nMethodHuffman) 
+		self.ui.comboBox.setCurrentIndex(sc.nMethodShannonFano)
 		self.ui.tableWidget.setColumnCount(3) 
 		self.ui.tableWidget.setHorizontalHeaderLabels(['X', 'P', 'Code']) 
 		self.ui.tableWidget.setColumnWidth(0, 50)
@@ -28,6 +30,7 @@ class cWindow(QtWidgets.QMainWindow):
 		self.ui.pushButton3.clicked.connect(self.btn3Clicked)
 		pass
 	def btn3Clicked(self):
+		indexList = self.ui.comboBox.currentIndex()
 		rowCol = self.ui.tableWidget.rowCount()
 
 		import xml.etree.ElementTree as ET
@@ -36,15 +39,15 @@ class cWindow(QtWidgets.QMainWindow):
 		tree = ET.ElementTree(element=root)
 
 		employ_methodcode = ET.SubElement(root, 'method-code')
-		employ_methodcode.text = 'Метод Хафмана'
+		employ_methodcode.text = self.mtd_operation.get(indexList)
 		employ_textcode= ET.SubElement(root, 'text-code')
 		employ_textcode.text = self.ui.lineEdit2.text()
 
 		employee_table = ET.SubElement(root, 'table')
 		for row in range(rowCol):
-			print('x=',self.ui.tableWidget.item(row, 0).text())
-			print('p=',self.ui.tableWidget.item(row, 1).text())
-			print('code=',self.ui.tableWidget.item(row, 2).text())
+			# print('x=',self.ui.tableWidget.item(row, 0).text())
+			# print('p=',self.ui.tableWidget.item(row, 1).text())
+			# print('code=',self.ui.tableWidget.item(row, 2).text())
 
 			employee_row = ET.SubElement(employee_table, 'row')
 
@@ -54,7 +57,7 @@ class cWindow(QtWidgets.QMainWindow):
 			employ_p.text = self.ui.tableWidget.item(row, 1).text()
 			employ_code = ET.SubElement(employee_row, 'code')
 			employ_code.text = self.ui.tableWidget.item(row, 2).text()
-		# xml_declaration=Trueにすると、バージョン情報など書き込んでくれる
+		ET.indent(tree, space="\t", level=0)
 		tree.write('test.xml', encoding='utf-8', xml_declaration=True)
 		tree = ET.ElementTree(file='test.xml')
 		return

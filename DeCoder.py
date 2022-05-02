@@ -11,6 +11,8 @@ import SimplestCompression as sc
 # Классы
 
 class cWindow(QtWidgets.QMainWindow):
+    mtd_operation = {'mtd-shanon-fano': sc.nMethodShannonFano, 'mtd-huffman': sc.nMethodHuffman}
+
     def __init__(self):
         # Дополнительные настройки формы
         super(cWindow, self).__init__()
@@ -32,6 +34,33 @@ class cWindow(QtWidgets.QMainWindow):
         self.ui.pushButton13.clicked.connect(self.btn13Clicked)
         # подключение клик-сигнал к слоту btn2Clicked
         self.ui.pushButton2.clicked.connect(self.btn2Clicked)
+        self.ui.pushButton14.clicked.connect(self.btn14Clicked)
+        pass
+
+    def btn14Clicked(self):
+        import xml.etree.ElementTree as ET
+        tree = ET.parse('test.xml')
+        root = tree.getroot()
+
+        self.ui.comboBox.setCurrentIndex(self.mtd_operation.get(root.find('method-code').text))
+
+        employ_textcode = root.find('text-code').text
+
+        self.ui.lineEdit1.setText(employ_textcode)
+
+        employ_table = root.find('table')
+        self.ui.tableWidget.clearContents()
+
+        for table in employ_table:
+            rowCol = self.ui.tableWidget.rowCount()
+            self.ui.tableWidget.setRowCount(rowCol+1)
+
+            employ_x= table.find('symbol').text
+            self.ui.tableWidget.setItem(rowCol, 0, QtWidgets.QTableWidgetItem(employ_x))
+            employ_p = table.find('probability').text
+            self.ui.tableWidget.setItem(rowCol, 1, QtWidgets.QTableWidgetItem(employ_p))
+            employ_code = table.find('code').text
+            self.ui.tableWidget.setItem(rowCol, 2, QtWidgets.QTableWidgetItem(employ_code))
         pass
 
     def btn11Clicked(self):

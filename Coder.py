@@ -16,7 +16,7 @@ class cWindow(QtWidgets.QMainWindow):
 		self.ui = Ui_MainWindow() 
 		self.ui.setupUi(self) 
 		self.ui.comboBox.addItems(sc.listMethod)
-		self.ui.comboBox.setCurrentIndex(sc.nMethodShannonFano)
+		self.ui.comboBox.setCurrentIndex(sc.nMethodHuffman)
 		self.ui.tableWidget.setColumnCount(3) 
 		self.ui.tableWidget.setHorizontalHeaderLabels(['X', 'P', 'Code']) 
 		self.ui.tableWidget.setColumnWidth(0, 50)

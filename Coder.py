@@ -45,12 +45,7 @@ class cWindow(QtWidgets.QMainWindow):
 
 		employee_table = ET.SubElement(root, 'table')
 		for row in range(rowCol):
-			# print('x=',self.ui.tableWidget.item(row, 0).text())
-			# print('p=',self.ui.tableWidget.item(row, 1).text())
-			# print('code=',self.ui.tableWidget.item(row, 2).text())
-
 			employee_row = ET.SubElement(employee_table, 'row')
-
 			employ_symbol = ET.SubElement(employee_row, 'symbol')
 			employ_symbol.text = self.ui.tableWidget.item(row, 0).text()
 			employ_p = ET.SubElement(employee_row, 'probability')
@@ -61,6 +56,7 @@ class cWindow(QtWidgets.QMainWindow):
 		tree.write('test.xml', encoding='utf-8', xml_declaration=True)
 		tree = ET.ElementTree(file='test.xml')
 		return
+
 	def btn1Clicked(self):
 	# Прочитаем исходное сообщение
 		tInputText = self.ui.lineEdit1.text()
